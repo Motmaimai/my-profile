@@ -92,6 +92,7 @@ const Main = () => {
         </div>
 
         <div className="block">
+          // eslint-disable-next-line react/jsx-no-comment-textnodes
           <h4>// Skills</h4>
           {Object.values(dev.skills).flat().map((s, i) => (
             <span key={i} className="tag">{s}</span>
