@@ -92,8 +92,8 @@ const Main = () => {
         </div>
 
         <div className="block">
-          // eslint-disable-next-line react/jsx-no-comment-textnodes
-          <h4>// Skills</h4>
+          {/* Fix: Bọc text có ký tự đặc biệt vào cặp ngoặc nhọn */}
+          <h4>{`// Skills`}</h4>
           {Object.values(dev.skills).flat().map((s, i) => (
             <span key={i} className="tag">{s}</span>
           ))}
@@ -124,13 +124,13 @@ const Main = () => {
 
         {/* Objective */}
         <section>
-          <h3>// Objective</h3>
+          <h3>{`// Objective`}</h3>
           <p>{dev.objective}</p>
         </section>
 
         {/* Experience */}
         <section>
-          <h3>// Experience</h3>
+          <h3>{`// Experience`}</h3>
           {dev.experience.map((exp, i) => (
             <div key={i} className="card">
               <h4>{exp.company}</h4>
@@ -151,7 +151,7 @@ const Main = () => {
 
         {/* Education */}
         <section>
-          <h3>// Education</h3>
+          <h3>{`// Education`}</h3>
           <div className="card">
             <h4>{dev.education.school}</h4>
             <p>{dev.education.major}</p>
@@ -161,7 +161,7 @@ const Main = () => {
 
         {/* Awards */}
         <section>
-          <h3>// Awards</h3>
+          <h3>{`// Awards`}</h3>
           <ul>
             {dev.awards.map((a, i) => (
               <li key={i}>{a}</li>
@@ -171,7 +171,7 @@ const Main = () => {
 
         {/* Hobbies */}
         <section>
-          <h3>// Hobbies</h3>
+          <h3>{`// Hobbies`}</h3>
           <div className="tags">
             {dev.hobbies.map((h, i) => (
               <span key={i} className="tag">{h}</span>
