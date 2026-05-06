@@ -1,7 +1,140 @@
-@import "../_globalColor";
+:root {
+  --bg: #0f172a;
+  --panel: #111827;
+  --soft: #1f2937;
+  --border: #2d3748;
 
-.dark-mode {
-  background-color: $darkBackground;
-  color: white;
-  transition: "0.1s";
+  --text: #e5e7eb;
+  --subtext: #9ca3af;
+
+  --primary: #3b82f6;
+  --green: #22c55e;
+}
+
+/* Reset */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", "Fira Code", monospace;
+}
+
+/* Layout fix tràn */
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  background: var(--panel);
+  padding: 24px;
+  border-right: 1px solid var(--border);
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.role {
+  color: var(--subtext);
+  margin-bottom: 20px;
+}
+
+.info p {
+  font-size: 13px;
+  color: var(--subtext);
+  margin: 4px 0;
+}
+
+/* Tag */
+.tag {
+  display: inline-block;
+  background: var(--soft);
+  padding: 6px 10px;
+  margin: 4px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* Editor header */
+.editor-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.file {
+  margin-left: 10px;
+  color: var(--subtext);
+}
+
+/* Code block (đỡ tối hơn) */
+.code {
+  background: #0b1220;
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+/* Section */
+section {
+  margin-bottom: 30px;
+}
+
+section h3 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+/* Card */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+/* Highlight */
+.highlight {
+  color: var(--green);
+  font-weight: 500;
+}
+
+/* Fix tràn text */
+p, li {
+  word-break: break-word;
 }
