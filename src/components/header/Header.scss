@@ -1,182 +1,182 @@
-@import "../../_globalColor";
+// Định nghĩa biến màu sắc để dễ quản lý
+$primary-color: #6c63ff; // Màu tím hiện đại
+$glass-bg-light: rgba(255, 255, 255, 0.7);
+$glass-bg-dark: rgba(10, 10, 25, 0.8);
+$text-light: #1a202c;
+$text-dark: #e2e8f0;
 
-/*React-headroom*/
-.headroom-wrapper {
-  max-height: 100px;
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 8%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px); // Hiệu ứng kính mờ cực mạnh
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  // Chế độ sáng
+  &.light-mode {
+    background: $glass-bg-light;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    .logo-name { color: $text-light; }
+    .menu-list li a { color: $text-light; }
+  }
+
+  // Chế độ tối (Pro nhất ở đây)
+  &.dark-mode {
+    background: $glass-bg-dark;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    .logo-name { color: $text-dark; }
+    .menu-list li a { color: $text-dark; }
+  }
 }
 
-/* header */
+.logo {
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
 
-.dark-menu {
-  background-color: $darkBackground !important;
-  color: $textColorDark;
+  .logo-bracket {
+    color: $primary-color;
+    font-weight: 400;
+    opacity: 0.8;
+  }
+
+  .logo-name {
+    padding: 0 4px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  &:hover .logo-name {
+    background: linear-gradient(120deg, $primary-color, #f06292);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 0.3s;
+  }
 }
 
-.dark-menu li a {
-  color: $textColorDark !important;
-}
-
-.dark-menu li a:hover {
-  background-color: $buttonColor !important;
-}
-
-.header {
-  background-color: $lightBackground1;
-  max-width: 100%;
-  padding: 15px 20px;
-  margin: 0px auto;
-}
-
-.header ul {
-  margin: 0;
-  padding: 0;
+.menu-list {
+  display: flex;
   list-style: none;
-  overflow: hidden;
+  align-items: center;
+  gap: 2rem; // Khoảng cách giữa các mục menu
+  margin: 0;
+
+  li {
+    a {
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      transition: 0.3s;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background: $primary-color;
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        color: $primary-color !important;
+        &::after { width: 100%; }
+      }
+    }
+  }
+
+  // Nút liên hệ kiểu nổi bật
+  .contact-nav {
+    background: linear-gradient(135deg, $primary-color 0%, #4a47b1 100%);
+    color: white !important;
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(108, 99, 255, 0.5);
+      &::after { display: none; }
+    }
+  }
 }
 
-.grey-color {
-  color: $subTitle;
+// Mobile Responsive (Pro Level)
+@media (max-width: 992px) {
+  .header-container {
+    padding: 1rem 5%;
+  }
+
+  .menu-list {
+    position: fixed;
+    top: 0;
+    right: -100%; // Ẩn menu
+    height: 100vh;
+    width: 280px;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(10, 10, 25, 0.95);
+    backdrop-filter: blur(25px);
+    transition: 0.5s cubic-bezier(0.8, 0, 0.2, 1);
+    gap: 2.5rem;
+
+    &.open {
+      right: 0; // Hiện menu
+    }
+
+    li {
+      margin: 0;
+      a { font-size: 1.2rem; }
+    }
+  }
+
+  .menu-icon {
+    display: block;
+    cursor: pointer;
+    z-index: 1100;
+  }
 }
 
-.header li a {
+// Hamburger Icon CSS
+.navicon {
+  background: $primary-color;
   display: block;
-  padding: 15px 20px;
-  color: $textColor;
-  text-decoration: none;
-}
-
-.header li a:hover,
-.header .menu-btn:hover {
-  background-color: $headerHoverBG;
-}
-
-.header .logo {
-  display: block;
-  flex: none;
-  float: left;
-  font-size: 1.5em;
-  text-decoration: none;
-  margin-top: 10px;
-  line-height: normal;
-}
-
-.header .logo-name {
-  font-family: "Agustina Regular";
-  font-weight: bold;
-  font-variant-ligatures: no-common-ligatures;
-  -webkit-font-variant-ligatures: no-common-ligatures;
-  padding: 0 10px;
-}
-
-/* menu */
-
-.header .menu {
-  clear: both;
-  max-height: 0;
-  transition: max-height 0.2s ease-out;
-}
-
-/* menu icon */
-
-.header .menu-icon {
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-  padding: 28px 20px;
+  height: 2.5px;
   position: relative;
-  user-select: none;
+  width: 28px;
+  border-radius: 5px;
+
+  &::before, &::after {
+    background: $primary-color;
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    transition: 0.3s;
+    border-radius: 5px;
+  }
+  &::before { top: 8px; }
+  &::after { bottom: 8px; }
 }
 
-.header .menu-icon .navicon {
-  background: $iconBackground;
-  display: block;
-  height: 2px;
-  position: relative;
-  transition: background 0.2s ease-out;
-  width: 18px;
-}
-
-.header .menu-icon .navicon-dark {
-  background: $textColorDark;
-}
-
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after {
-  background: $iconBackground;
-  content: "";
-  display: block;
-  height: 100%;
-  position: absolute;
-  transition: all 0.2s ease-out;
-  width: 100%;
-}
-
-.header .menu-icon .navicon-dark:before,
-.header .menu-icon .navicon-dark:after {
-  background: $textColorDark !important;
-  content: "";
-  display: block;
-  height: 100%;
-  position: absolute;
-  transition: all 0.2s ease-out;
-  width: 100%;
-}
-
-.header .menu-icon .navicon:before {
-  top: 5px;
-}
-
-.header .menu-icon .navicon:after {
-  top: -5px;
-}
-
-/* menu btn */
-
-.header .menu-btn {
+.menu-btn {
   display: none;
-}
-
-.header .menu-btn:checked ~ .menu {
-  max-height: 486px;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon {
-  background: transparent !important;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
-  transform: rotate(-45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
-  transform: rotate(45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-  top: 0;
-}
-
-/* 48em = 768px */
-
-@media (min-width: 48em) {
-  .header li {
-    float: left;
-  }
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .header .menu {
-    max-height: none;
-  }
-  .header .menu-icon {
-    display: none;
-  }
-}
-@media (max-width: 960px) and (min-width: 768px) {
-  .header {
-    font-size: 12px;
+  &:checked ~ .menu-icon .navicon {
+    background: transparent;
+    &::before { transform: rotate(-45deg); top: 0; }
+    &::after { transform: rotate(45deg); bottom: 0; }
   }
 }

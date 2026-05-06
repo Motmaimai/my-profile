@@ -1,127 +1,134 @@
-@import "../../_globalColor";
-
-.main {
-  width: 90%;
-  padding: 20px 10px;
-  margin: 0px auto;
-  margin-top: 4rem;
-}
-.greet-main {
-  width: 90%;
-  padding: 20px 10px;
-  margin: 0px auto;
-  margin-top: 2rem;
-}
-
-.greeting-main {
+.hero-dashboard {
+  --primary-color: #00ff41; // Terminal Green
+  --bg-dark: #050505;
+  --border-color: rgba(0, 255, 65, 0.2);
+  
+  padding: 80px 5%;
+  min-height: 90vh;
   display: flex;
+  align-items: center;
+  background-color: var(--bg-dark);
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 15px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .grid-item {
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    position: relative;
+    backdrop-filter: blur(10px);
+  }
+
+  // Khối Terminal chiếm diện tích lớn nhất
+  .terminal-core {
+    grid-column: span 2;
+    grid-row: span 2;
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.05);
+
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+      
+      .controls {
+        display: flex; gap: 8px;
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+      }
+      .terminal-title { color: #666; font-family: monospace; font-size: 0.9rem; }
+    }
+
+    .main-title {
+      font-size: 4rem;
+      color: #fff;
+      font-weight: 800;
+      margin: 20px 0;
+      letter-spacing: -2px;
+
+      .cursor {
+        display: inline-block;
+        width: 20px;
+        background: var(--primary-color);
+        animation: blink 1s infinite;
+      }
+    }
+  }
+
+  .status-monitor {
+    grid-column: span 1;
+    .monitor-header { color: var(--primary-color); text-transform: uppercase; font-weight: bold; margin-bottom: 20px; }
+    .stat-row {
+      display: flex; justify-content: space-between; margin-bottom: 12px;
+      font-family: monospace; color: #888;
+      .value { color: #fff; }
+    }
+
+    .radar-circle {
+      width: 120px; height: 120px;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      margin: 30px auto 0;
+      position: relative;
+      overflow: hidden;
+
+      .scanner {
+        position: absolute; width: 100%; height: 100%;
+        background: conic-gradient(from 0deg, transparent, rgba(0, 255, 65, 0.2));
+        animation: spin 4s linear infinite;
+      }
+    }
+  }
+
+  .connect-hub {
+    grid-column: span 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    .hub-label { color: #444; font-size: 0.8rem; margin-bottom: 15px; text-transform: uppercase; }
+  }
+
+  // Nút bấm kiểu High-tech
+  .action-btn {
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: monospace;
+    transition: 0.3s;
+    display: inline-block;
+    margin-right: 15px;
+
+    &.primary {
+      background: var(--primary-color);
+      color: #000;
+      &:hover { box-shadow: 0 0 20px var(--primary-color); }
+    }
+    &.ghost {
+      border: 1px solid var(--border-color);
+      color: var(--primary-color);
+      &:hover { background: rgba(0, 255, 65, 0.1); }
+    }
+  }
 }
 
-.subTitle {
-  color: $subTitle !important;
-}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes spin { 100% { transform: rotate(360deg); } }
 
-.greeting-main {
-  display: flex;
-}
-
-.greeting-main > * {
-  flex: 1;
-  margin-bottom: 30px;
-}
-
-.empty-div {
-  margin-bottom: 40px;
-}
-
-.button-greeting-div {
-  display: flex;
-  margin-top: 40px;
-}
-.download-link-button {
-  text-decoration: none;
-}
-
-.greeting-text {
-  font-size: 70px;
-  line-height: 1.1;
-  color: $textColor !important;
-}
-
-.greeting-text-p {
-  font-size: 30px;
-  line-height: 40px;
-}
-
-.greeting-image-div > img {
-  max-width: 100%;
-  height: auto;
-}
-
-.wave-emoji {
-  animation-duration: 1.8s;
-  animation-iteration-count: infinite;
-  animation-name: wave;
-  display: inline-block;
-  transform-origin: 70% 70%;
-}
-
-@keyframes wave {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(-10deg);
-  }
-  20% {
-    transform: rotate(12deg);
-  }
-  30% {
-    transform: rotate(-10deg);
-  }
-  40% {
-    transform: rotate(9deg);
-  }
-  50% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-/* Media Query */
-@media (max-width: 1380px) {
-  .greeting-text {
-    font-size: 50px;
-  }
-  .greeting-text-p {
-    font-size: 20px;
-  }
-}
-@media (max-width: 768px) {
-  .button-greeting-div {
-    justify-content: space-around;
-  }
-  .greeting-text {
-    font-size: 30px;
-    text-align: center;
-  }
-  .greeting-text-p {
-    font-size: 16px;
-    line-height: normal;
-    text-align: center;
-  }
-  .greeting-main {
-    display: block;
-  }
-  .greeting-image-div {
-    height: 256px;
-  }
-}
-
-@media (max-width: 320px) {
-  .main {
-    width: auto;
+// Responsive
+@media (max-width: 992px) {
+  .hero-dashboard .dashboard-grid {
+    grid-template-columns: 1fr;
+    .terminal-core, .status-monitor, .connect-hub { grid-column: span 1; }
   }
 }
