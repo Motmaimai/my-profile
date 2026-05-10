@@ -251,7 +251,7 @@ const Main = () => {
               <div key={i} className="project-bento-card">
                 <div className="card-top">
                   <span className="badge">{proj.type}</span>
-                  <a target="_blank" href={proj.link} className="link">↗</a>
+                  <a target="_blank" href={proj.link} className="link" rel="noreferrer">↗</a>
                 </div>
                 <h4>{proj.name}</h4>
                 <p>{proj.desc}</p>
