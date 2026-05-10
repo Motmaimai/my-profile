@@ -48,4 +48,12 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+    document.addEventListener('mousemove', (e) => {
+        const body = document.body;
+        // Lấy tọa độ chuột và gán vào biến CSS
+        body.style.setProperty('--mouse-x', `${e.clientX}px`);
+        body.style.setProperty('--mouse-y', `${e.clientY}px`);
+    });
+  </script>
 </html>

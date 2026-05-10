@@ -93,21 +93,21 @@ const Main = () => {
         desc: "Giám sát bản quyền phần mềm và phần cứng doanh nghiệp.",
         type: "System Tool",
         tech: "Python, C#",
-        link: "#"
+        link: "https://ittrackingtool.vietnamcong.com"
       },
       {
         name: "onepos",
         desc: "Phần mềm POS thế hệ mới hỗ trợ đa nền tảng.",
         type: "Management",
         tech: "Laravel, Vue",
-        link: "#"
+        link: "https://onepos.vietnamcong.com"
       },
       {
         name: "quizlogix",
         desc: "Nền tảng thi trắc nghiệm và hỗ trợ giảng dạy AI.",
         type: "EdTech",
         tech: "NodeJS, Socket.io",
-        link: "#"
+        link: "https://quizlogix.vietnamcong.com"
       }
     ],
     hobbies: ["Du lịch", "Trò chơi tốc độ", "Thám hiểm"]
@@ -202,7 +202,7 @@ const Main = () => {
             <span className="dot yellow"></span>
             <span className="dot green"></span>
           </div>
-          <span className="file-name">portfolio_v2.ts</span>
+          <span className="file-name">portfolio.ts</span>
         </div>
 
         <div className="hero-code">
@@ -251,7 +251,7 @@ const Main = () => {
               <div key={i} className="project-bento-card">
                 <div className="card-top">
                   <span className="badge">{proj.type}</span>
-                  <a href={proj.link} className="link">↗</a>
+                  <a target="_blank" href={proj.link} className="link">↗</a>
                 </div>
                 <h4>{proj.name}</h4>
                 <p>{proj.desc}</p>
