@@ -351,3 +351,14 @@ h3 { color: var(--primary); font-family: monospace; font-size: 20px; margin-bott
     scrollbar-width: thin;
     scrollbar-color: #5f5cf0 rgba(255, 255, 255, 0.05);
 }
+
+#snakeCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Quan trọng: Để không cản trở việc click vào các nút trên web */
+  z-index: -1; 
+  opacity: 0.6; /* Làm mờ một chút để không chiếm spotlight của nội dung chính */
+}
