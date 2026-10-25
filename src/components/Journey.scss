@@ -1,0 +1,216 @@
+@import "../styles/tokens";
+
+.journey {
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+
+// Desktop with motion: tall track, sticky stage, camera driven by scroll.
+.journey__track {
+  position: relative;
+  height: calc(100vh * (var(--count) * 0.6 + 1));
+}
+
+.journey__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+
+  .scene {
+    z-index: -2;
+  }
+}
+
+.journey__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+      90deg,
+      rgba(7, 9, 12, 0.88) 0%,
+      rgba(7, 9, 12, 0.35) 45%,
+      rgba(7, 9, 12, 0.75) 100%
+    ),
+    linear-gradient(180deg, var(--ink) 0%, rgba(7, 9, 12, 0) 18%);
+}
+
+.journey__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-rows: 1fr auto;
+  gap: 32px 64px;
+  height: 100%;
+  padding-top: calc(var(--nav-h) + 48px);
+  padding-bottom: 40px;
+}
+
+.journey__head {
+  display: grid;
+  align-content: start;
+  gap: 20px;
+  max-width: 560px;
+}
+
+.journey__intro {
+  font-size: var(--fs-lead);
+  color: #c5ccd3;
+}
+
+.journey__checkpoints {
+  list-style: none;
+  display: grid;
+  align-content: center;
+  gap: 26px;
+  grid-row: span 2;
+}
+
+.checkpoint {
+  position: relative;
+  padding: 4px 0 4px 26px;
+  border-left: 1px solid var(--line-strong);
+  opacity: 0.45;
+  transition: opacity 500ms var(--ease-out), border-color 500ms;
+
+  &__code {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--signal);
+  }
+  &__title {
+    margin-top: 6px;
+    font-size: var(--fs-h3);
+  }
+  &__text {
+    margin-top: 8px;
+    color: #c5ccd3;
+  }
+
+  &.is-passed {
+    opacity: 0.6;
+  }
+  &.is-active {
+    opacity: 1;
+    border-left-color: var(--ember);
+    .checkpoint__code {
+      color: var(--ember);
+    }
+  }
+  &.is-active::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 10px;
+    width: 9px;
+    height: 9px;
+    background: var(--ember);
+    transform: rotate(45deg);
+    box-shadow: 0 0 14px var(--ember);
+  }
+}
+
+.journey__hud {
+  align-self: end;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--mute);
+}
+
+.journey__bar {
+  position: relative;
+  width: 160px;
+  height: 1px;
+  background: var(--line-strong);
+  span {
+    position: absolute;
+    inset: 0;
+    background: var(--ember);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+}
+
+.journey__gallery {
+  display: grid;
+  gap: 16px;
+  padding-bottom: var(--section-y);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+  figure {
+    margin: 0;
+  }
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+  figcaption {
+    margin-top: 8px;
+    font-size: 0.8125rem;
+    color: var(--mute);
+  }
+}
+
+// Small screens and reduced motion: a normal section, every checkpoint
+// readable at once, scene as a static backdrop.
+@mixin journey-static {
+  .journey__track {
+    height: auto;
+  }
+  .journey__stage {
+    position: relative;
+    height: auto;
+  }
+  .journey__scrim {
+    background: linear-gradient(
+      180deg,
+      var(--ink) 0%,
+      rgba(7, 9, 12, 0.55) 20%,
+      rgba(7, 9, 12, 0.88) 60%,
+      var(--ink) 100%
+    );
+  }
+  .journey__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    padding-top: var(--section-y);
+    padding-bottom: var(--section-y);
+  }
+  .journey__checkpoints {
+    grid-row: auto;
+  }
+  .checkpoint,
+  .checkpoint.is-passed {
+    opacity: 1;
+    &.is-active::before {
+      display: none;
+    }
+    &.is-active {
+      border-left-color: var(--line-strong);
+      .checkpoint__code {
+        color: var(--signal);
+      }
+    }
+  }
+  .journey__hud {
+    display: none;
+  }
+}
+
+@include down($bp-md) {
+  @include journey-static;
+}
+
+@include reduced-motion {
+  @include journey-static;
+}
+
+@media (max-height: 620px) {
+  @include journey-static;
+}

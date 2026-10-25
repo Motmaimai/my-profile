@@ -1,0 +1,46 @@
+@import "../styles/tokens";
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 32px 0;
+  font-size: 0.875rem;
+  color: var(--mute);
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 32px;
+  }
+
+  &__made {
+    font-size: 0.75rem;
+    color: var(--dim);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+
+  &__egg,
+  &__top {
+    min-height: 36px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--mute);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    transition: color var(--t-fast);
+    &:hover {
+      color: var(--ember);
+    }
+  }
+}

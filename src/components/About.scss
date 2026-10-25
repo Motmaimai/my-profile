@@ -1,0 +1,44 @@
+@import "../styles/tokens";
+
+.about__grid {
+  display: grid;
+  gap: 48px;
+  @include up($bp-md) {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 96px;
+  }
+}
+
+.about__story {
+  display: grid;
+  gap: 1.4em;
+  color: #c5ccd3;
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+  max-width: 680px;
+
+  .about__lede {
+    color: var(--paper);
+    font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+    line-height: 1.55;
+  }
+}
+
+.about__facts {
+  margin: 0;
+  align-self: start;
+  border-top: 1px solid var(--line-strong);
+
+  div {
+    display: grid;
+    gap: 6px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  dt {
+    color: var(--ember);
+  }
+  dd {
+    margin: 0;
+  }
+}

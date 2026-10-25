@@ -1,0 +1,114 @@
+@import "../styles/tokens";
+
+.contact {
+  overflow: hidden;
+
+  // A route arriving at its destination.
+  &::before {
+    content: "";
+    position: absolute;
+    left: max(var(--gutter), calc((100% - var(--container)) / 2));
+    top: 0;
+    width: 1px;
+    height: clamp(3rem, 2rem + 4vw, 6rem);
+    background: linear-gradient(transparent, var(--ember));
+  }
+}
+
+.contact__inner {
+  display: grid;
+  gap: 28px;
+  justify-items: start;
+  max-width: 960px;
+}
+
+.contact__title {
+  font-size: clamp(2.25rem, 1.4rem + 4vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.14;
+  em {
+    font-style: normal;
+    color: var(--ember);
+  }
+}
+
+.contact__lead {
+  font-size: var(--fs-lead);
+  color: #c5ccd3;
+  max-width: 600px;
+}
+
+.contact__email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 12px;
+  max-width: 100%;
+}
+
+.contact__email-link {
+  font-size: clamp(1.125rem, 0.8rem + 1.8vw, 2rem);
+  font-weight: 500;
+  color: var(--paper);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ember);
+  padding-bottom: 4px;
+  overflow-wrap: anywhere;
+  transition: color var(--t-fast);
+  &:hover {
+    color: var(--ember);
+  }
+}
+
+.contact__copy {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--mute);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color var(--t-fast), border-color var(--t-fast);
+  &:hover {
+    color: var(--paper);
+    border-color: var(--paper);
+  }
+}
+
+.contact__channels {
+  list-style: none;
+  display: grid;
+  gap: 0;
+  width: 100%;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+  @include up($bp-sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include up($bp-md) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  li {
+    display: grid;
+    gap: 6px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    @include up($bp-sm) {
+      padding-right: 16px;
+    }
+    > * {
+      justify-self: start;
+    }
+  }
+}
+
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 16px;
+}
