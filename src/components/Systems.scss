@@ -1,0 +1,298 @@
+@import "../styles/tokens";
+
+.explorer {
+  border: 1px solid var(--line-strong);
+  background: var(--graphite);
+
+  &__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  &__tab {
+    min-height: 40px;
+    padding: 0 16px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--mute);
+    font: 500 0.9375rem/1 var(--font-sans);
+    cursor: pointer;
+    transition: color var(--t-fast), border-color var(--t-fast),
+      background var(--t-fast);
+
+    .mono {
+      font-size: 0.75rem;
+      color: var(--dim);
+      margin-right: 4px;
+    }
+    &:hover {
+      color: var(--paper);
+    }
+    &[aria-selected="true"] {
+      color: var(--paper);
+      border-color: var(--line-strong);
+      background: var(--graphite-2);
+      .mono {
+        color: var(--ember);
+      }
+    }
+  }
+
+  &__panel {
+    padding: clamp(24px, 4vw, 56px) clamp(20px, 4vw, 48px);
+  }
+
+  &__meta {
+    display: grid;
+    gap: 14px;
+    margin-top: clamp(32px, 4vw, 48px);
+    padding-top: 28px;
+    border-top: 1px dashed var(--line-strong);
+    @include up($bp-md) {
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px 48px;
+    }
+  }
+
+  &__summary {
+    font-size: var(--fs-lead);
+    color: #c5ccd3;
+    @include up($bp-md) {
+      grid-row: span 2;
+    }
+  }
+
+  &__stack {
+    font-size: 0.875rem;
+    color: var(--paper);
+  }
+
+  &__note {
+    font-size: 0.75rem;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+}
+
+// ------------------------------------------------------------ data flow ---
+
+.flow {
+  --node: 44px;
+  display: grid;
+  list-style: none;
+  gap: 0;
+
+  @include up($bp-md) {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  &__stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--node) 1fr;
+    column-gap: 18px;
+    padding-bottom: 28px;
+    animation: stage-in 600ms var(--ease-out) both;
+    animation-delay: calc(var(--i) * 90ms);
+
+    @include up($bp-md) {
+      grid-template-columns: 1fr;
+      padding: 0 16px 0 0;
+    }
+
+    // Connector to the next stage, with packets moving along it.
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: calc(var(--node) / 2);
+      top: var(--node);
+      bottom: 0;
+      width: 1px;
+      background: repeating-linear-gradient(
+        180deg,
+        var(--signal) 0 6px,
+        transparent 6px 14px
+      );
+      background-size: 1px 14px;
+      opacity: 0.55;
+      animation: flow-y 0.9s linear infinite;
+
+      @include up($bp-md) {
+        left: calc(var(--node) + 10px);
+        right: 10px;
+        top: calc(var(--node) / 2);
+        bottom: auto;
+        width: auto;
+        height: 1px;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--signal) 0 6px,
+          transparent 6px 14px
+        );
+        background-size: 14px 1px;
+        animation-name: flow-x;
+      }
+    }
+  }
+
+  &__node {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    width: var(--node);
+    height: var(--node);
+    border: 1px solid var(--signal);
+    color: var(--signal);
+    font-size: 0.75rem;
+    background: var(--ink);
+    box-shadow: 0 0 0 4px var(--graphite), 0 0 24px rgba(90, 209, 230, 0.18);
+
+    @include up($bp-md) {
+      grid-row: auto;
+      margin-bottom: 18px;
+    }
+  }
+
+  &__stage:last-child &__node {
+    border-color: var(--ember);
+    color: var(--ember);
+    box-shadow: 0 0 0 4px var(--graphite), 0 0 24px rgba(244, 162, 89, 0.25);
+  }
+
+  &__label {
+    font-weight: 600;
+    font-size: 1.0625rem;
+    line-height: 1.3;
+    align-self: end;
+  }
+
+  &__detail {
+    font-size: 0.8125rem;
+    color: var(--mute);
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+}
+
+@keyframes flow-x {
+  to {
+    background-position: 14px 0;
+  }
+}
+@keyframes flow-y {
+  to {
+    background-position: 0 14px;
+  }
+}
+@keyframes stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+// --------------------------------------------------------------- skills ---
+
+.systems__stack {
+  margin-top: clamp(4rem, 3rem + 4vw, 7rem);
+}
+
+.systems__stack-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 32px;
+  margin-bottom: 32px;
+}
+
+.systems__stack-title {
+  font-size: var(--fs-h3);
+}
+
+.systems__legend {
+  font-size: 0.75rem;
+  color: var(--dim);
+}
+
+.systems__grid {
+  display: grid;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  @include up($bp-sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include up($bp-md) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.skill {
+  padding: 28px 24px 32px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transition: background var(--t-fast);
+
+  &:hover {
+    background: var(--graphite);
+  }
+
+  &__index {
+    font-size: 0.75rem;
+    color: var(--ember);
+    margin-bottom: 18px;
+  }
+  &__title {
+    font-size: 1.25rem;
+  }
+  &__note {
+    margin-top: 6px;
+    font-size: 0.875rem;
+    color: var(--mute);
+  }
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+    list-style: none;
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      font-size: 0.875rem;
+      line-height: 1.2;
+    }
+  }
+
+  &__level {
+    font: 600 0.625rem/1 var(--font-mono);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    padding: 3px 5px;
+    border: 1px solid currentColor;
+    cursor: help;
+
+    &--advanced {
+      color: var(--ember);
+    }
+    &--intermediate {
+      color: var(--signal);
+    }
+  }
+}

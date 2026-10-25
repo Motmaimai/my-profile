@@ -1,0 +1,249 @@
+@import "../styles/tokens";
+
+.projects__group {
+  & + & {
+    margin-top: clamp(4rem, 3rem + 4vw, 7rem);
+  }
+}
+
+.projects__group-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line-strong);
+
+  h3 {
+    font-size: var(--fs-h3);
+  }
+  p {
+    font-size: 0.8125rem;
+    color: var(--dim);
+  }
+}
+
+// ------------------------------------------------------------ case files ---
+
+.case {
+  display: grid;
+  gap: 18px 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+
+  @include up($bp-md) {
+    grid-template-columns: 200px minmax(0, 1fr) minmax(0, 1.1fr);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 0;
+    height: 1px;
+    background: var(--ember);
+    transition: width 600ms var(--ease-out);
+  }
+  &:hover::before {
+    width: 100%;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 14px;
+    @include up($bp-md) {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  &__index {
+    font-size: 0.875rem;
+    color: var(--ember);
+  }
+
+  &__type {
+    font-size: 0.75rem;
+    color: var(--dim);
+  }
+
+  &__name {
+    font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  &__problem,
+  &__extra {
+    color: #c5ccd3;
+    & + & {
+      margin-top: 10px;
+    }
+  }
+
+  &__key {
+    display: block;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 4px;
+  }
+
+  &__detail {
+    display: grid;
+    gap: 16px;
+    align-content: start;
+  }
+
+  &__features {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    color: var(--mute);
+    font-size: 0.9375rem;
+
+    li {
+      position: relative;
+      padding-left: 22px;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 0.7em;
+        width: 8px;
+        height: 1px;
+        background: var(--signal);
+      }
+    }
+  }
+}
+
+// -------------------------------------------------------------- exhibits ---
+
+.exhibits {
+  display: grid;
+  gap: 20px;
+  margin-top: 32px;
+  @include up($bp-sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include up($bp-lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.exhibit {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 0%;
+  perspective: 900px;
+
+  &__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 26px 26px;
+    border: 1px solid var(--line-strong);
+    background: radial-gradient(
+        420px circle at var(--mx) var(--my),
+        rgba(244, 162, 89, 0.07),
+        transparent 60%
+      ),
+      var(--graphite);
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transform-style: preserve-3d;
+    transition: transform 400ms var(--ease-out), border-color var(--t-fast);
+  }
+
+  &:hover &__inner {
+    border-color: rgba(244, 162, 89, 0.45);
+  }
+
+  &__url {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 -26px 26px;
+    padding: 12px 26px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.75rem;
+    color: var(--dim);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__dot {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 10px var(--signal);
+  }
+
+  &__head {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+
+  &__index {
+    font-size: 0.8125rem;
+    color: var(--ember);
+  }
+
+  &__name {
+    margin: 14px 0 10px;
+    font-size: 1.625rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    transform: translateZ(24px);
+  }
+
+  &__desc,
+  &__extra {
+    color: #c5ccd3;
+    margin-bottom: 18px;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-top: auto;
+    padding-top: 22px;
+  }
+
+  &__link {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--ember);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(244, 162, 89, 0.35);
+    padding-bottom: 2px;
+    transition: border-color var(--t-fast), color var(--t-fast);
+    &:hover {
+      color: #ffc58f;
+      border-color: currentColor;
+    }
+    &--quiet {
+      color: var(--mute);
+      border-color: var(--line-strong);
+    }
+  }
+
+  @include reduced-motion {
+    &__inner {
+      transform: none;
+    }
+  }
+}

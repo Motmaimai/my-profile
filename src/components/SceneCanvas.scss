@@ -1,0 +1,42 @@
+@import "../styles/tokens";
+
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--signal);
+}
+
+.scene__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out);
+}
+
+.scene--ready .scene__canvas {
+  opacity: 1;
+}
+
+.scene__fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.scene--ready .scene__fallback {
+  display: none;
+}
+
+.scene__fallback-route {
+  stroke: var(--ember);
+  filter: drop-shadow(0 0 6px rgba(244, 162, 89, 0.6));
+}
+
+.scene__fallback-nodes {
+  stroke: var(--signal);
+  opacity: 0.8;
+}

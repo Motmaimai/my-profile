@@ -1,0 +1,78 @@
+.print-resume {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 14mm 16mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .site > *:not(.print-resume) {
+    display: none !important;
+  }
+
+  .print-resume {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 10pt;
+    line-height: 1.45;
+    color: #111;
+
+    .pr-name {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .pr-h {
+      margin: 12pt 0 4pt;
+      padding-bottom: 2pt;
+      border-bottom: 1px solid #bbb;
+      font-size: 10.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .pr-role {
+      margin-top: 2pt;
+      font-weight: 600;
+      color: #a35a12;
+    }
+    .pr-contact {
+      margin-top: 4pt;
+      color: #444;
+    }
+    .pr-item {
+      margin-bottom: 6pt;
+      break-inside: avoid;
+    }
+    .pr-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12pt;
+    }
+    .pr-tech {
+      color: #555;
+      font-style: italic;
+    }
+    ul {
+      margin: 2pt 0;
+      padding-left: 14pt;
+    }
+    li {
+      margin: 1pt 0;
+    }
+    .pr-cols {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 16pt;
+      break-inside: avoid;
+    }
+  }
+}

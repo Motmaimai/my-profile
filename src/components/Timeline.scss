@@ -1,0 +1,154 @@
+@import "../styles/tokens";
+
+.timeline__track {
+  --year-w: 0px;
+  --rail-x: 11px;
+  position: relative;
+
+  @include up($bp-md) {
+    --year-w: 150px;
+    --rail-x: calc(var(--year-w) + 40px);
+  }
+}
+
+.timeline__rail {
+  position: absolute;
+  top: 8px;
+  bottom: 0;
+  left: var(--rail-x);
+  width: 2px;
+  margin-left: -1px;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--line-strong) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+.timeline__progress {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--ember), #ffcf9e);
+  box-shadow: 0 0 12px rgba(244, 162, 89, 0.55);
+  transform: scaleY(0);
+  transform-origin: top;
+  will-change: transform;
+}
+
+.timeline__list {
+  list-style: none;
+  display: grid;
+  gap: clamp(48px, 6vw, 80px);
+}
+
+.milestone {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-left: calc(var(--rail-x) + 32px);
+
+  @include up($bp-md) {
+    grid-template-columns: var(--year-w) 1fr;
+    column-gap: 80px;
+    padding-left: 0;
+  }
+
+  &__year {
+    font-size: 0.875rem;
+    color: var(--ember);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+
+    @include up($bp-md) {
+      font-size: clamp(1.75rem, 1.2rem + 1.2vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      text-align: right;
+      line-height: 1;
+      margin: 0;
+    }
+  }
+
+  &__dot {
+    position: absolute;
+    top: 4px;
+    left: var(--rail-x);
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    border: 2px solid var(--dim);
+    background: var(--ink);
+    transform: rotate(45deg);
+    transition: border-color 400ms, background 400ms, box-shadow 400ms;
+  }
+
+  &.is-visible &__dot {
+    border-color: var(--ember);
+    background: var(--ember);
+    box-shadow: 0 0 0 5px var(--ink), 0 0 18px rgba(244, 162, 89, 0.7);
+  }
+
+  &__body {
+    max-width: 680px;
+  }
+
+  &__place {
+    color: var(--signal);
+  }
+
+  &__title {
+    margin-top: 8px;
+    font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem);
+  }
+
+  &__text {
+    margin-top: 12px;
+    color: #c5ccd3;
+  }
+
+  &__period {
+    margin-top: 18px;
+    font-size: 0.75rem;
+    color: var(--dim);
+  }
+
+  &__desc {
+    list-style: none;
+    display: grid;
+    gap: 6px;
+    margin: 10px 0 16px;
+    font-size: 0.9375rem;
+    color: var(--mute);
+
+    li {
+      position: relative;
+      padding-left: 20px;
+      &::before {
+        content: "›";
+        position: absolute;
+        left: 2px;
+        color: var(--signal);
+        font-family: var(--font-mono);
+      }
+    }
+  }
+
+  &--highlight &__title {
+    color: var(--ember);
+  }
+
+  &--future {
+    .milestone__dot {
+      border-style: dashed;
+      border-color: var(--signal);
+    }
+    &.is-visible .milestone__dot {
+      background: var(--ink);
+      border-color: var(--signal);
+      box-shadow: 0 0 0 5px var(--ink), 0 0 18px rgba(90, 209, 230, 0.5);
+    }
+    .milestone__year {
+      color: var(--signal);
+    }
+  }
+}
